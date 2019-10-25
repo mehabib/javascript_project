@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+        <script>
+                        $(document).ready(function(){
+                          
+                          
+                          
+
+                       $("#form").submit(function(e){
+                         e.preventDefault();
+                         var list = ""
+                         var country = $("#country").val()
+                         var univ_name = $("#univ_name").val()
+                         var univAPI = "http://universities.hipolabs.com/search?"
+                         if(country != ""){
+                           univAPI = univAPI + "country=" + country
+                         }
+                         if (univ_name != ""){
+                           univAPI = univAPI + "&name=" + univ_name
+                         }
+
+                $.getJSON (univAPI).done(function(data) {
+
+                                
+                       for (var i = 0; i < data.length; i++) {
+                       list = list + "<tr><td>"+data[i].name+"</td><td>"+data[i].country+"</td><td><a href='"+data[i].web_pages[0]+"'>"+data[i].web_pages[0]+"</a></td></tr>"
+              
+                         
+                         $('#name').html(list) + "<br>"
+                         
+                        
+              
+            }
+                               
+      
+                         });
+
+                        });
+
+                        });     
+            
+        </script>
+        
+
+    </head>
+    
+    <body class="bg-warning">
+        <div class="container" >
+                <div class='row'>
+                    <div class='col-lg-12'>
+                      
+<h1>
+  Find a University in The world
+                      </h1>                
+<form id="form" >
+  Country name:<br>
+  <input type="text" id="country" name="country" value="GHANA" class="form-control">
+  <br>
+  City name:<br>
+  <input type="text" id="univ_name" name="univ_name" class="form-control">
+  <br>
+  
+  
+
+  <input type="submit" value="Search For Universities" class="btn btn-danger btn-lg">
+</form> 
+ 
+                      <p> List of Universities:</P>
+                            <table id="name" class="table table-bordered">
+                
+                           </table>
+                  <pan><p id="name">
+                    
+                    </p></pan>
+     
+                      </p>
+                        
+                        
+                          
+                    </div>
+                
+        
+            </div>
+        </div> 
+    
+      
+      
+      
+    </body>
+    
+</html>
